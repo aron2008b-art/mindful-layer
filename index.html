@@ -1,0 +1,1650 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-base);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Ambient Background Orbs */
+.ambient-glow {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(140px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.22;
+}
+.glow-1 { width: 520px; height: 520px; background: #7c3aed; top: -140px; left: -120px; }
+.glow-2 { width: 460px; height: 460px; background: #4f46e5; top: 45%; right: -140px; }
+.glow-3 { width: 420px; height: 420px; background: #9333ea; bottom: 5%; left: 15%; }
+
+.container {
+  max-width: 1220px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Typography */
+h1, h2, .serif-num, .serif-quote {
+  font-family: var(--font-serif);
+  letter-spacing: -0.01em;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #e9d5ff 0%, #c084fc 45%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-text {
+  color: var(--gold-accent);
+}
+
+/* Glass Cards */
+.glass-card {
+  background: rgba(19, 17, 31, 0.78);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--border-purple);
+  border-radius: 24px;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.glass-card:hover {
+  border-color: var(--border-purple-strong);
+  box-shadow: 0 18px 48px -16px rgba(139, 92, 246, 0.25);
+}
+
+.gold-card {
+  border-color: var(--border-gold);
+  background: linear-gradient(145deg, rgba(28, 22, 38, 0.85), rgba(19, 17, 31, 0.9));
+}
+
+/* Header / Navbar */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(9, 8, 15, 0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-purple);
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+  gap: 16px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-main);
+}
+
+.brand-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.28), rgba(79, 70, 229, 0.2));
+  border: 1px solid var(--border-purple-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-title {
+  font-weight: 700;
+  font-size: 16px;
+  display: block;
+  line-height: 1.1;
+}
+.brand-sub {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--purple-light);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.nav-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 13.5px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.nav-links a:hover {
+  color: var(--purple-light);
+}
+.nav-links a.nav-highlight {
+  color: var(--purple-light);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--purple-light);
+  box-shadow: 0 0 10px var(--purple-light);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.3); }
+}
+
+/* Language Switcher */
+.lang-switch {
+  display: flex;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-purple);
+  border-radius: 12px;
+  padding: 3px;
+  gap: 2px;
+}
+.lang-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.lang-btn.active {
+  background: linear-gradient(135deg, var(--purple-primary), var(--purple-light));
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(139, 92, 246, 0.4);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 24px;
+  border-radius: 14px;
+  font-family: var(--font-sans);
+font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.25s ease;
+}
+.btn-primary {
+  background: linear-gradient(135deg, #8b5cf6 0%, #c084fc 100%);
+  color: #09080f;
+  box-shadow: 0 8px 25px -6px rgba(168, 85, 247, 0.55);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px -4px rgba(192, 132, 252, 0.7);
+}
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--border-purple-strong);
+  color: var(--text-main);
+}
+.btn-secondary:hover {
+  background: rgba(139, 92, 246, 0.14);
+}
+.btn-emerald {
+  background: linear-gradient(135deg, #10b981, #34d399);
+  color: #052e16;
+  font-weight: 700;
+  box-shadow: 0 8px 24px -6px rgba(52, 211, 153, 0.45);
+}
+.btn-emerald:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px -4px rgba(52, 211, 153, 0.65);
+}
+
+/* Section Spacing */
+section {
+  padding: 84px 0;
+  border-top: 1px solid rgba(168, 85, 247, 0.1);
+}
+section:first-of-type {
+  border-top: none;
+  padding-top: 64px;
+}
+
+.section-eyebrow {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--purple-light);
+  font-weight: 600;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+.section-title {
+  font-size: clamp(30px, 4.2vw, 46px);
+  line-height: 1.14;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.section-lead {
+  color: var(--text-muted);
+  font-size: 16px;
+  max-width: 680px;
+}
+
+/* HERO SECTION */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 0.95fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: rgba(139, 92, 246, 0.12);
+  border: 1px solid var(--border-purple-strong);
+  font-size: 11px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--purple-light);
+  margin-bottom: 20px;
+}
+
+.hero-title {
+  font-size: clamp(36px, 4.8vw, 56px);
+  line-height: 1.1;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.hero-desc {
+  color: var(--text-muted);
+  font-size: 16.5px;
+  margin-bottom: 28px;
+  max-width: 600px;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 36px;
+}
+
+.kz-stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.stat-box {
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(19, 17, 31, 0.7);
+  border: 1px solid var(--border-purple);
+}
+.stat-num {
+  font-family: var(--font-serif);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--purple-light);
+  line-height: 1.1;
+}
+.stat-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 6px;
+  line-height: 1.4;
+}
+
+/* Hero Smartphone Visualization */
+.hero-phone-card {
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+.lotus-hero-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.lotus-glow-circle {
+  width: 84px;
+  height: 84px;
+  border-radius: 26px;
+  background: radial-gradient(circle, rgba(192, 132, 252, 0.25) 0%, rgba(19, 17, 31, 0.9) 75%);
+  border: 1px solid var(--border-purple-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  box-shadow: 0 0 36px rgba(139, 92, 246, 0.35);
+}
+
+.step-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.step-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.step-item.highlight {
+  background: rgba(139, 92, 246, 0.16);
+  border-color: var(--border-purple-strong);
+}
+.step-item.choice {
+  background: rgba(52, 211, 153, 0.08);
+  border-color: rgba(52, 211, 153, 0.3);
+}
+
+.step-num {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 13px;
+  flex-shrink: 0;
+  background: rgba(139, 92, 246, 0.22);
+  color: var(--purple-light);
+}
+.step-item.choice .
+step-num {
+  background: rgba(52, 211, 153, 0.2);
+  color: var(--emerald-accent);
+}
+
+/* CALCULATOR SECTION */
+.calc-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 0.85fr;
+  gap: 36px;
+  align-items: center;
+  padding: 40px;
+}
+
+.slider-panel {
+  background: rgba(9, 8, 15, 0.65);
+  border: 1px solid var(--border-purple);
+  border-radius: 20px;
+  padding: 24px;
+  margin: 24px 0;
+}
+
+.slider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 14px;
+  gap: 12px;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(168, 85, 247, 0.24);
+  outline: none;
+  cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #c084fc, #8b5cf6);
+  border: 2px solid #fff;
+  box-shadow: 0 0 18px rgba(192, 132, 252, 0.9);
+  cursor: pointer;
+}
+
+.slider-ticks {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11.5px;
+  color: var(--text-dim);
+  margin-top: 10px;
+}
+
+.equiv-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.equiv-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+  padding: 14px;
+}
+.equiv-val {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.calc-result-box {
+  background: linear-gradient(180deg, rgba(46, 16, 101, 0.45), rgba(9, 8, 15, 0.85));
+  border: 1px solid var(--border-purple-strong);
+  border-radius: 24px;
+  padding: 32px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.big-years {
+  font-family: var(--font-serif);
+  font-size: clamp(44px, 5vw, 62px);
+  font-weight: 700;
+  line-height: 1.05;
+  margin: 8px 0;
+}
+
+/* 4 DIMENSIONS & 7 PROBLEMS */
+.filter-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 32px 0 28px;
+}
+
+.filter-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-purple);
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.filter-btn:hover {
+  background: rgba(139, 92, 246, 0.15);
+  color: var(--text-main);
+}
+.filter-btn.active {
+  background: linear-gradient(135deg, #8b5cf6, #a855f7);
+  color: #fff;
+  border-color: var(--purple-light);
+  box-shadow: 0 6px 20px -6px rgba(168, 85, 247, 0.6);
+}
+
+.problems-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.problem-card {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.problem-card.hidden {
+  display: none;
+}
+
+.tag-pill {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: rgba(139, 92, 246, 0.16);
+  color: var(--purple-light);
+}
+.tag-pill.gold {
+  background: rgba(243, 198, 119, 0.16);
+  color: var(--gold-accent);
+}
+
+.problem-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 14px 0 10px;
+  color: var(--text-main);
+}
+
+.problem-text {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+.problem-foot {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  font-size: 12px;
+  color: var(--purple-light);
+}
+
+/* Kazakhstan Research Block */
+.kz-research-box {
+  margin-top: 28px;
+  padding: 32px;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+.rq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.rq-item {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 15px 16px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-gold);
+}
+
+.rq-badge {
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  background: rgba(243, 198, 119, 0.18);
+color: var(--gold-accent);
+  font-weight: 700;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* PHILOSOPHY SECTION */
+.freedom-toggle-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  margin: 32px 0;
+}
+
+.freedom-card {
+  padding: 28px;
+  cursor: pointer;
+  position: relative;
+}
+.freedom-card.impulse {
+  border-color: rgba(248, 113, 113, 0.25);
+}
+.freedom-card.autonomy {
+  border-color: rgba(52, 211, 153, 0.35);
+  background: linear-gradient(145deg, rgba(16, 42, 36, 0.45), rgba(19, 17, 31, 0.85));
+}
+
+.philosophers-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+  margin-bottom: 32px;
+}
+
+.phil-card {
+  padding: 20px;
+  cursor: pointer;
+}
+.phil-card.active-phil {
+  border-color: var(--gold-accent);
+  background: rgba(243, 198, 119, 0.08);
+}
+.phil-name {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--purple-light);
+  font-weight: 700;
+}
+.phil-card.abai-card .phil-name {
+  color: var(--gold-accent);
+}
+.phil-concept {
+  font-family: var(--font-serif);
+  font-size: 21px;
+  font-weight: 700;
+  margin: 6px 0 8px;
+}
+
+/* Abai Reflection Widget */
+.abai-widget {
+  padding: 32px;
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: 28px;
+  align-items: center;
+}
+
+.abai-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0 18px;
+}
+.abai-tag-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-gold);
+  color: var(--text-main);
+  padding: 8px 14px;
+  border-radius: 12px;
+  font-size: 12.5px;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.abai-tag-btn:hover, .abai-tag-btn.selected {
+  background: rgba(243, 198, 119, 0.2);
+  color: var(--gold-accent);
+  border-color: var(--gold-accent);
+}
+
+.abai-response {
+  padding: 18px;
+  border-radius: 16px;
+  background: rgba(9, 8, 15, 0.65);
+  border: 1px solid rgba(243, 198, 119, 0.25);
+  font-size: 14px;
+  color: #f8e3b4;
+}
+
+/* INTERACTIVE SIMULATOR SECTION */
+.sim-layout {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 36px;
+  align-items: start;
+  margin-top: 36px;
+}
+
+.sim-controls {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.app-selector {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.app-choice-btn {
+  padding: 12px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-purple);
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 13.5px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.app-choice-btn.active {
+  background: rgba(139, 92, 246, 0.25);
+  border-color: var(--purple-light);
+  color: #fff;
+}
+
+/* Toggle Switch */
+.switch-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-purple);
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 46px;
+  height: 26px;
+  flex-shrink: 0;
+}
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.slider-round {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #2a263d;
+  transition: .3s;
+  border-radius: 34px;
+}
+.slider-round:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .3s;
+  border-radius: 50%;
+}
+input:checked + .slider-round {
+  background: linear-gradient(135deg, #8b5cf6, #c084fc);
+}
+input:checked + .slider-round:before {
+  transform: translateX(20px);
+}
+
+.telemetry-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  text-align: center;
+}
+.tele-box {
+  padding: 12px;
+  border-radius: 14px;
+  background: rgba(9, 8, 15, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+.tele-num {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 700;
+}
+
+/* Smartphone Frame */
+.phone-chassis {
+  width: 100%;
+max-width: 390px;
+  margin: 0 auto;
+  padding: 12px;
+  border-radius: 44px;
+  background: linear-gradient(160deg, rgba(192, 132, 252, 0.38), rgba(30, 27, 46, 0.85), rgba(139, 92, 246, 0.3));
+  box-shadow: 0 28px 70px -15px rgba(88, 28, 135, 0.65);
+}
+
+.phone-screen {
+  background: #0b0a12;
+  border-radius: 34px;
+  min-height: 640px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.phone-statusbar {
+  padding: 14px 22px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  color: var(--text-dim);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.dynamic-island {
+  width: 84px;
+  height: 18px;
+  background: #000;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.phone-body {
+  padding: 24px 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.phone-footer {
+  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.02);
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+}
+
+/* Breathing Lotus Animation */
+@keyframes lotusBreathe {
+  0%, 100% { transform: scale(0.94); box-shadow: 0 0 18px rgba(168, 85, 247, 0.35); }
+  50% { transform: scale(1.07); box-shadow: 0 0 38px rgba(192, 132, 252, 0.75); }
+}
+.breathing-orb {
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  margin: 0 auto;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.35), rgba(19, 17, 31, 0.95));
+  border: 2px solid var(--purple-light);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: lotusBreathe 4s ease-in-out infinite;
+}
+
+.phone-input {
+  width: 100%;
+  padding: 11px 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-purple-strong);
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  outline: none;
+}
+.phone-input:focus {
+  border-color: var(--purple-light);
+}
+
+.intent-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+}
+.intent-chip {
+  padding: 6px 11px;
+  border-radius: 10px;
+  font-size: 11.5px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text-muted);
+  cursor: pointer;
+}
+.intent-chip.active {
+  background: rgba(139, 92, 246, 0.3);
+  border-color: var(--purple-light);
+  color: #fff;
+}
+
+.ai-bubble {
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(79, 70, 229, 0.16);
+  border: 1px solid rgba(129, 140, 248, 0.35);
+  font-size: 12px;
+  color: #e0e7ff;
+  text-align: left;
+}
+.ai-badge {
+  display: inline-block;
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: rgba(129, 140, 248, 0.25);
+  padding: 2px 6px;
+  border-radius: 5px;
+  margin-bottom: 4px;
+  font-weight: 700;
+}
+
+/* ETHICS & PILOT SECTION */
+.ethics-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+  margin: 32px 0 40px;
+}
+.ethics-card {
+  padding: 20px;
+}
+.ethics-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
+  background: rgba(139, 92, 246, 0.16);
+  border: 1px solid var(--border-purple);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--purple-light);
+  margin-bottom: 12px;
+}
+
+.pilot-banner {
+  padding: 36px;
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  gap: 32px;
+  align-items: center;
+}
+
+.pilot-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+footer {
+  border-top: 1px solid var(--border-purple);
+  padding: 36px 0;
+  color: var(--text-dim);
+  font-size: 13px;
+}
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1024px) {
+  .hero-grid, .calc-grid, .kz-research-box, .abai-widget, .sim-layout, .pilot-banner {
+    grid-template-columns: 1fr;
+  }
+.problems-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .philosophers-grid, .ethics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .nav-links {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .kz-stats-row, .equiv-grid, .problems-grid, .freedom-toggle-wrap, .philosophers-grid, .ethics-grid, .pilot-form {
+    grid-template-columns: 1fr;
+  }
+  .calc-grid, .kz-research-box, .abai-widget, .sim-controls, .pilot-banner {
+    padding: 22px;
+  }
+  section {
+    padding: 56px 0;
+  }
+}
+  <nav class="nav-links">
+    <a href="#calculator" data-i18n="nav_calc">Цена привычки</a>
+    <a href="#dimensions" data-i18n="nav_dims">4 измерения</a>
+    <a href="#philosophy" data-i18n="nav_phil">Философия</a>
+    <a href="#simulator" class="nav-highlight">
+      <span class="pulse-dot"></span>
+      <span data-i18n="nav_sim">Живой прототип</span>
+    </a>
+    <a href="#ethics" data-i18n="nav_ethics">Этика и Пилот</a>
+  </nav>
+
+  <div class="lang-switch" role="group" aria-label="Language switcher">
+    <button class="lang-btn active" id="btn-ru" onclick="switchLang('ru')">RU</button>
+    <button class="lang-btn" id="btn-kz" onclick="switchLang('kz')">KZ</button>
+    <button class="lang-btn" id="btn-en" onclick="switchLang('en')">EN</button>
+  </div>
+</div>
+      <h1 class="hero-title">
+        <span class="gradient-text">Mindful Layer</span> — <span data-i18n="hero_title">цифровой инструмент, возвращающий контроль над вниманием в сетевом обществе</span>
+      </h1>
+
+      <p class="hero-desc" data-i18n="hero_desc">
+        Мы открываем приложение не задумываясь и листаем ленту дольше, чем планировали. Mindful Layer не запрещает социальные сети — он создаёт осознанную паузу между импульсом и действием, помогая сохранить долгосрочную автономию.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#simulator" class="btn btn-primary" data-i18n="hero_cta_1">Запустить симулятор паузы</a>
+        <a href="#dimensions" class="btn btn-secondary" data-i18n="hero_cta_2">Исследовать 4 измерения</a>
+      </div>
+
+      <!-- Kazakhstan Context (DataReportal 2026) -->
+      <div class="kz-stats-row">
+        <div class="stat-box">
+          <div class="stat-num">19.7 млн</div>
+          <div class="stat-label" data-i18n="stat_1">интернет-пользователей в Казахстане (DataReportal, 2026)</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">18.3 млн</div>
+          <div class="stat-label" data-i18n="stat_2">аккаунтов в соцсетях (не всегда уникальные люди)</div>
+        </div>
+        <div class="stat-box" style="border-color: var(--border-purple-strong);">
+          <div class="stat-num" style="font-size: 22px; color: #fff;" data-i18n="stat_3_title">Не болезнь</div>
+          <div class="stat-label" data-i18n="stat_3_desc">Разрыв между тем, чего я хочу, и тем, что я делаю на самом деле.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Visual: Smartphone with Lotus & 3-Step Flow -->
+    <div class="glass-card hero-phone-card">
+      <div style="display:flex; justify-content:space-between; font-size:11px; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.12em; margin-bottom:18px;">
+        <span>Slide 07 – 08 · Architecture</span>
+        <span>On-Device · No Account</span>
+      </div>
+
+      <div class="lotus-hero-wrap">
+        <div class="lotus-glow-circle">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#c084fc" stroke-width="1.6">
+            <path d="M12 3C10.2 6.2 9.5 9.3 12 13C14.5 9.3 13.8 6.2 12 3Z" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 13C8.5 11.2 5.5 10.5 3.5 12.5C5.5 15.8 8.8 16.5 12 15.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 13C15.5 11.2 18.5 10.5 20.5 12.5C18.5 15.8 15.2 16.5 12 15.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M6.5 16.5C8 18.8 10.2 19.5 12 19.5C13.8 19.5 16 18.8 17.5 16.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div style="font-weight:700; font-size:18px;">Mindful Layer</div>
+<div style="font-size:12px; color:var(--text-muted);">Kazakh · Russian · English</div>
+      </div>
+
+      <div class="step-flow">
+        <div class="step-item">
+          <div class="step-num">01</div>
+          <div>
+            <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.1em; color:var(--red-accent); font-weight:700;" data-i18n="flow_1_t">Импульс</div>
+            <div style="font-size:13.5px;" data-i18n="flow_1_d">Рука автоматически тянется к телефону по привычке</div>
+          </div>
+        </div>
+
+        <div class="step-item highlight">
+          <div class="step-num">02</div>
+          <div>
+            <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.1em; color:var(--purple-light); font-weight:700;" data-i18n="flow_2_t">Пауза (5–10 секунд)</div>
+            <div style="font-size:13.5px; font-weight:600;" data-i18n="flow_2_d">«Зачем ты открыл это приложение прямо сейчас?»</div>
+          </div>
+        </div>
+
+        <div class="step-item choice">
+          <div class="step-num">03</div>
+          <div>
+            <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.1em; color:var(--emerald-accent); font-weight:700;" data-i18n="flow_3_t">Осознанный выбор</div>
+            <div style="font-size:13.5px;" data-i18n="flow_3_d">Закрыть или продолжить — решаю я, а не алгоритм</div>
+          </div>
+        </div>
+      </div>
+
+      <p class="serif-quote gold-text" style="margin-top:22px; text-align:center; font-size:18px; font-style:italic;" data-i18n="hero_quote">
+        «Мы не отнимаем выбор. Мы создаём паузу, в которой возможен более осознанный выбор.»
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- 2. LIFETIME HABIT CALCULATOR -->
+<section id="calculator">
+  <div class="container">
+    <div class="glass-card calc-grid">
+      <div>
+        <span class="section-eyebrow">Slide 03 · A Small Habit Adds Up</span>
+        <h2 class="section-title" data-i18n="calc_title">Цена маленькой привычки</h2>
+        <p class="section-lead" style="font-size:15px;" data-i18n="calc_desc">
+          Небольшие ежедневные решения незаметно складываются в значительную часть человеческой жизни. Передвиньте ползунок, чтобы увидеть масштаб привычного скроллинга на горизонте 40 лет.
+        </p>
+
+        <div class="slider-panel">
+          <div class="slider-header">
+            <label for="habitSlider" style="font-size:14px; font-weight:600;" data-i18n="calc_lbl">Ежедневное время в соцсетях:</label>
+            <span id="dailyVal" class="serif-num gradient-text" style="font-size:32px; font-weight:700;">2.0 ч / день</span>
+          </div>
+          <input type="range" id="habitSlider" min="0.5" max="8" step="0.5" value="2" />
+          <div class="slider-ticks">
+            <span>0.5 ч</span>
+            <span>2 ч (29 200 ч · 3.3 г.)</span>
+            <span>4 ч (6.7 лет)</span>
+            <span>8 ч</span>
+          </div>
+        </div>
+
+        <div class="equiv-grid">
+          <div class="equiv-card">
+            <div style="font-size:11.5px; color:var(--text-muted);" data-i18n="eq_1">Книг прочитано</div>
+            <div class="equiv-val" id="eqBooks">~4 867</div>
+            <div style="font-size:11px; color:var(--purple-light);">по 6 часов на книгу</div>
+          </div>
+          <div class="equiv-card">
+            <div style="font-size:11.5px; color:var(--text-muted);" data-i18n="eq_2">Языков до уровня B2</div>
+            <div class="equiv-val" id="eqLangs">~48</div>
+            <div style="font-size:11px; color:var(--purple-light);">по 600 часов практики</div>
+          </div>
+          <div class="equiv-card">
+            <div style="font-size:11.5px; color:var(--text-muted);" data-i18n="eq_3">Инженерных проектов</div>
+            <div class="equiv-val" id="eqProj">~292</div>
+            <div style="font-size:11px; color:var(--purple-light);">по 100 часов фокуса</div>
+          </div>
+        </div>
+
+        <p style="font-size:12px; color:var(--text-dim); font-style:italic;" data-i18n="calc_note">
+          * Расчёт: часы × 365 дней × 40 лет.
+Иллюстрация масштаба, а не прогноз.
+        </p>
+      </div>
+
+      <div class="calc-result-box">
+        <!-- Hourglass SVG -->
+        <svg width="86" height="86" viewBox="0 0 100 100" fill="none" style="margin-bottom:14px;">
+          <rect x="22" y="10" width="56" height="5" rx="2.5" fill="#c084fc"/>
+          <rect x="22" y="85" width="56" height="5" rx="2.5" fill="#c084fc"/>
+          <path d="M28 15 C28 38, 47 46, 50 50 C53 46, 72 38, 72 15 Z" stroke="#c084fc" stroke-width="2" fill="rgba(139,92,246,0.12)"/>
+          <path d="M28 85 C28 62, 47 54, 50 50 C53 54, 72 62, 72 85 Z" stroke="#c084fc" stroke-width="2" fill="rgba(139,92,246,0.12)"/>
+          <path d="M34 27 L66 27 C63 38, 53 45, 50 48 C47 45, 37 38, 34 27 Z" fill="#8b5cf6"/>
+          <line x1="50" y1="50" x2="50" y2="82" stroke="#e9d5ff" stroke-width="1.8" stroke-dasharray="3 2"/>
+          <path d="M31 83 L69 83 C65 72, 55 68, 50 67 C45 68, 35 72, 31 83 Z" fill="#c084fc"/>
+        </svg>
+
+        <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.14em; color:var(--purple-light);" data-i18n="calc_res_top">За 40 лет это составит:</div>
+        <div class="big-years gradient-text" id="resYears">3.3 года</div>
+        <div style="font-size:15px; font-weight:600; color:#fff;" id="resTotalHours">29 200 часов за 40 лет</div>
+        <div style="font-size:13px; color:var(--purple-light); margin-top:4px;" id="resYearHours">730 часов в год (~30.4 суток)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. FOUR DIMENSIONS & 7 SOCIAL PROBLEMS -->
+<section id="dimensions">
+  <div class="container">
+    <span class="section-eyebrow">Системный анализ цифровой среды</span>
+    <h2 class="section-title" data-i18n="dims_title">4 измерения и 7 социальных проблем</h2>
+    <p class="section-lead" data-i18n="dims_desc">
+      Социальные сети сами по себе не являются злом — они помогают учиться и общаться. Но архитектура удержания внимания порождает взаимосвязанные вызовы на четырёх уровнях.
+    </p>
+
+    <div class="filter-tabs" role="tablist">
+      <button class="filter-btn active" data-filter="all" onclick="filterProblems('all', this)">Все (7)</button>
+      <button class="filter-btn" data-filter="individual" onclick="filterProblems('individual', this)">1. Индивидуальное</button>
+      <button class="filter-btn" data-filter="social" onclick="filterProblems('social', this)">2. Социальное</button>
+      <button class="filter-btn" data-filter="informational" onclick="filterProblems('informational', this)">3. Информационное</button>
+      <button class="filter-btn" data-filter="cultural" onclick="filterProblems('cultural', this)">4. Этическое и культурное</button>
+    </div>
+
+    <div class="problems-grid">
+      <!-- Problem 1 -->
+      <article class="glass-card problem-card" data-category="individual">
+        <div>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span class="tag-pill">Индивидуальное</span>
+            <span style="font-size:11px; color:var(--text-dim);">01 / 07</span>
+          </div>
+          <h3 class="problem-title">Потеря внимания, сон и концентрация</h3>
+          <p class="problem-text">
+            Бесконечная лента и уведомления фрагментируют фокус. Студент садится готовиться к экзамену, но каждые несколько минут проверяет телефон, тратя ресурсы на возврат к задаче. Использование экрана перед сном сбивает режим отдыха.
+          </p>
+        </div>
+        <div class="problem-foot">Постепенная утрата контроля над собственным временем.</div>
+      </article>
+
+      <!-- Problem 2 -->
+      <article class="glass-card problem-card" data-category="individual">
+        <div>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span class="tag-pill">Индивидуальное</span>
+            <span style="font-size:11px; color:var(--text-dim);">02 / 07</span>
+          </div>
+          <h3 class="problem-title">Психологическое благополучие и FOMO</h3>
+          <p class="problem-text">
+Чрезмерное использование связано с тревожностью, стрессом и страхом упущенной выгоды (FOMO). При этом мы не утверждаем упрощённо, что соцсети напрямую вызывают депрессию: связь сложная и зависит от контекста и характера контента.
+          </p>
+        </div>
+        <div class="problem-foot">Научная корректность без навешивания медицинских ярлыков.</div>
+      </article>
+
+      <!-- Problem 3 -->
+      <article class="glass-card problem-card" data-category="social">
+        <div>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span class="tag-pill">Социальное</span>
+            <span style="font-size:11px; color:var(--text-dim);">03 / 07</span>
+          </div>
+          <h3 class="problem-title">Социальное сравнение и «успешный успех»</h3>
+          <p class="problem-text">
+            Люди публикуют витрину лучших моментов: путешествия, внешность, достижения и гиперпродуктивность. Сравнение своей обычной жизни с чужими отфильтрованными успехами вызывает неудовлетворённость собой и зависть.
+          </p>
+        </div>
+        <div class="problem-foot">Давление касается не только роскоши, но и внешности и продуктивности.</div>
+      </article>
+
+      <!-- Problem 4 -->
+      <article class="glass-card problem-card" data-category="social">
+        <div>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span class="tag-pill">Социальное</span>
+            <span style="font-size:11px; color:var(--text-dim);">04 / 07</span>
+          </div>
+          <h3 class="problem-title">Кибербуллинг и давление общественного мнения</h3>
+          <p class="problem-text">
+            В отличие от обычного конфликта, цифровая травля, оскорбления и слухи продолжаются круглосуточно (24/7) и быстро охватывают широкую аудиторию. Особенно уязвимы подростки и молодые пользователи.
+          </p>
+        </div>
+        <div class="problem-foot">Токсичная среда усиливается вирусным распространением.</div>
+      </article>
+
+      <!-- Problem 5 -->
+      <article class="glass-card problem-card" data-category="informational">
+        <div>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span class="tag-pill">Информационное</span>
+            <span style="font-size:11px; color:var(--text-dim);">05 / 07</span>
+          </div>
+          <h3 class="problem-title">Дезинформация и алгоритмические пузыри</h3>
+          <p class="problem-text">
+            Манипулятивные заголовки и непроверенные факты искажают восприятие реальности. Алгоритмы (Simon, Castells, Zuboff) угадывают интересы по кликам, замыкая пользователя в односторонней информационной среде.
+          </p>
+        </div>
+        <div class="problem-foot">«Догадки алгоритма по кликам — не всегда мои истинные ценности.»</div>
+      </article>
+
+      <!-- Problem 6 -->
+      <article class="glass-card problem-card" data-category="cultural">
+        <div>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span class="tag-pill gold">Этическое и культурное</span>
+            <span style="font-size:11px; color:var(--text-dim);">06 / 07</span>
+          </div>
+          <h3 class="problem-title">Приватность и сбор поведенческих данных</h3>
+          <p class="problem-text">
+            Платформы фиксируют каждое взаимодействие, реакцию и длительность просмотра для таргетирования рекламы. Пользователь часто не понимает, сколько данных о нём собрано. Цифровая свобода касается и суверенитета над данными.
+          </p>
+        </div>
+        <div class="problem-foot gold-text">Решение Mindful Layer: 100% локальная работа на устройстве.</div>
+      </article>
+    </div>
+
+    <!-- Problem 7 & Open Research Questions: Kazakhstan & Cultural Diversity -->
+    <div class="glass-card gold-card kz-research-box problem-card" data-category="cultural">
+      <div>
+<span class="tag-pill gold" style="margin-bottom:12px;">07 / 07 · Исследовательские вопросы: Казахстан и культурное разнообразие</span>
+        <h3 style="font-family:var(--font-serif); font-size:28px; line-height:1.2; margin-bottom:14px;">
+          Культурное разнообразие и казахоязычный контент в эпоху глобальных алгоритмов
+        </h3>
+        <p style="font-size:14px; color:var(--text-muted); margin-bottom:16px;">
+          Социальные сети влияют на то, какие языки звучат громче и какие культурные ценности становятся заметнее. Глобальные платформы открывают возможности для продвижения культуры Казахстана, но также могут усиливать доминирование глобальных трендов.
+        </p>
+        <div style="padding:14px 16px; border-radius:14px; background:rgba(9,8,15,0.65); border:1px solid var(--border-gold); font-size:12.5px; color:#f3d89c;">
+          <strong>Важная научная оговорка:</strong> в нашем проекте пока нет результатов эмпирического анализа реальных рекомендательных лент, поэтому мы не утверждаем, что алгоритмы уже доказанно вытесняют казахоязычный контент. Это открытые исследовательские гипотезы.
+        </div>
+      </div>
+
+      <div class="rq-list">
+        <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.14em; color:var(--gold-accent); font-weight:700;">Открытые исследовательские вопросы</div>
+        <div class="rq-item">
+          <div class="rq-badge">01</div>
+          <div style="font-size:14px; font-weight:500;">Какие культурные ценности становятся более заметными и поощряются рекомендательными системами?</div>
+        </div>
+        <div class="rq-item">
+          <div class="rq-badge">02</div>
+          <div style="font-size:14px; font-weight:500;">Насколько алгоритмы способствуют распространению глобальных трендов в ущерб локальному контенту?</div>
+        </div>
+        <div class="rq-item">
+          <div class="rq-badge">03</div>
+          <div style="font-size:14px; font-weight:500;">Получают ли небольшие региональные авторы Казахстана сопоставимую алгоритмическую видимость?</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. PHILOSOPHICAL FOUNDATION -->
+<section id="philosophy">
+  <div class="container">
+    <span class="section-eyebrow">Slides 04 – 06 · Philosophical Core</span>
+    <h2 class="section-title" data-i18n="phil_title">Философская основа проекта</h2>
+    <p class="section-lead" data-i18n="phil_desc">
+      Внимание — это не просто время, это условие человеческой свободы. Старые философские идеи дают нам язык, чтобы осмыслить цифровую привычку.
+    </p>
+
+    <!-- Two Types of Freedom -->
+    <div class="freedom-toggle-wrap">
+      <div class="glass-card freedom-card impulse">
+        <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.12em; color:var(--red-accent); font-weight:700; margin-bottom:6px;">Импульсивный выбор</div>
+        <h3 style="font-family:var(--font-serif); font-size:28px; margin-bottom:10px;">Мгновенная свобода</h3>
+        <p style="font-size:14px; color:var(--text-muted);">
+          Возможность сделать то, что хочется прямо сейчас: открыть ленту на «пять минут» по инерции. Формально вас никто не заставляет, но ваше действие противоречит вашим собственным намерениям.
+        </p>
+      </div>
+
+      <div class="glass-card freedom-card autonomy">
+        <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.12em; color:var(--emerald-accent); font-weight:700; margin-bottom:6px;">Осознанный выбор</div>
+        <h3 style="font-family:var(--font-serif); font-size:28px; margin-bottom:10px;">Долгосрочная автономия</h3>
+        <p style="font-size:14px; color:var(--text-muted);">
+          Способность действовать в соответствии со своими целями и ценностями: изучать инженерию, читать книги, развивать проекты, быть с близкими. Свобода — это способность не быть заложником своих импульсов.
+        </p>
+      </div>
+    </div>
+
+    <!-- 5 Thinkers Gallery (Slide 5) -->
+    <div class="philosophers-grid">
+      <div class="glass-card phil-card" onclick="highlightPhilosopher(this)">
+<div class="phil-name">Аристотель</div>
+        <div class="phil-concept">Акрасия</div>
+        <p style="font-size:12.5px; color:var(--text-muted);">Мы разумом знаем, что лучше, но под давлением привычки делаем то, что хуже.</p>
+      </div>
+
+      <div class="glass-card phil-card" onclick="highlightPhilosopher(this)">
+        <div class="phil-name">Эпиктет · Стоицизм</div>
+        <div class="phil-concept">Контроль выбора</div>
+        <p style="font-size:12.5px; color:var(--text-muted);">Мы не контролируем алгоритмы мира, но в нашей власти — наши суждения и осознанный выбор.</p>
+      </div>
+
+      <div class="glass-card phil-card" onclick="highlightPhilosopher(this)">
+        <div class="phil-name">Иммануил Кант</div>
+        <div class="phil-concept">Автономия</div>
+        <p style="font-size:12.5px; color:var(--text-muted);">Подлинная свобода — следовать правилам, которые ты сам разумно и спокойно выбрал.</p>
+      </div>
+
+      <div class="glass-card phil-card" onclick="highlightPhilosopher(this)">
+        <div class="phil-name">Мартин Хайдеггер</div>
+        <div class="phil-concept">Постав (Gestell)</div>
+        <p style="font-size:12.5px; color:var(--text-muted);">Технологии могут превращать самого человека и его внимание в исчисляемый ресурс.</p>
+      </div>
+
+      <div class="glass-card phil-card abai-card active-phil" onclick="highlightPhilosopher(this)">
+        <div class="phil-name">Абай Кунанбаев</div>
+        <div class="phil-concept gold-text">Өткен күнге есеп бер</div>
+        <p style="font-size:12.5px; color:var(--text-muted);">«Был ли этот день достойным?» Ушедшее время не вернуть — проверяй, на что ты потратил день.</p>
+      </div>
+    </div>
+
+    <!-- Abai Weekly Reflection Widget (Slide 6) -->
+    <div class="glass-card gold-card abai-widget">
+      <div>
+        <span class="tag-pill gold" style="margin-bottom:10px;">Slide 06 · Из Казахстана · Абай</span>
+        <h3 class="serif-quote gold-text" style="font-size:32px; line-height:1.15; margin-bottom:12px;">
+          «Был ли этот день достойным?»
+        </h3>
+        <p style="font-size:14px; color:var(--text-muted);">
+          Недельная рефлексия в духе Абая: <strong style="color:#fff;">«Куда ушло моё внимание за неделю? Без оценок и чувства вины.»</strong> Выберите, как прошла ваша неделя, чтобы получить мягкий вопрос для размышления.
+        </p>
+      </div>
+
+      <div>
+        <div style="font-size:12px; color:var(--gold-accent); font-weight:600;">Отметьте, куда ушла основная часть вашего внимания на этой неделе:</div>
+        <div class="abai-tags">
+          <button class="abai-tag-btn" onclick="reflectAbai(this, 'scroll')">Вечерний скроллинг по привычке</button>
+          <button class="abai-tag-btn" onclick="reflectAbai(this, 'study')">Учёба, код и инженерные задачи</button>
+          <button class="abai-tag-btn" onclick="reflectAbai(this, 'fomo')">Новости, чужие успехи и FOMO</button>
+          <button class="abai-tag-btn" onclick="reflectAbai(this, 'family')">Живые разговоры с близкими</button>
+        </div>
+        <div class="abai-response" id="abaiReflectionText">
+          Нажмите на любую категорию выше. Mindful Layer никогда не ставит «плохих оценок» — мы лишь помогаем увидеть картину недели яснее.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. LIVE INTERACTIVE PROTOTYPE (SIMULATOR) -->
+<section id="simulator">
+  <div class="container">
+    <div style="text-align:center; max-width:740px; margin:0 auto;">
+      <span class="section-eyebrow">Interactive Prototype · Friction Loop Mechanic</span>
+      <h2 class="section-title" data-i18n="sim_title">Живой симулятор Mindful Layer</h2>
+      <p class="section-lead" style="margin:0 auto;" data-i18n="sim_desc">
+        Обычный ограничитель обходится одним нажатием «Продолжить». Mindful Layer создаёт <strong style="color:var(--purple-light);">повторяющийся цикл осознанного сопротивления (Friction Loop)</strong>: каждая новая попытка обойти ваше собственное правило требует всё больше усилий, пока импульс не угаснет сам.
+      </p>
+    </div>
+<div class="sim-layout">
+      <!-- Left Controls -->
+      <div class="glass-card sim-controls">
+        <div>
+          <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.12em; color:var(--purple-light); font-weight:700;">Шаг 1 · Вы сами задаёте правила</div>
+          <h3 style="font-size:20px; margin-top:4px;">Настройка личного лимита</h3>
+        </div>
+
+        <div>
+          <div style="font-size:13px; color:var(--text-muted);">Выберите приложение для теста:</div>
+          <div class="app-selector">
+            <button class="app-choice-btn active" id="app-TikTok" onclick="selectApp('TikTok', 40)">TikTok</button>
+            <button class="app-choice-btn" id="app-Instagram" onclick="selectApp('Instagram', 30)">Instagram</button>
+            <button class="app-choice-btn" id="app-YouTube" onclick="selectApp('YouTube', 45)">YouTube</button>
+          </div>
+        </div>
+
+        <div>
+          <div style="display:flex; justify-content:space-between; font-size:13.5px; margin-bottom:8px;">
+            <span style="color:var(--text-muted);">Ваш дневной лимит:</span>
+            <strong id="simLimitText" style="color:var(--purple-light);">40 минут / день</strong>
+          </div>
+          <input type="range" id="simLimitRange" min="15" max="90" step="5" value="40" oninput="changeSimLimit(this.value)" />
+        </div>
+
+        <!-- Optional AI Helper Switch -->
+        <div class="switch-row">
+          <div>
+            <div style="font-size:14px; font-weight:700; display:flex; align-items:center; gap:8px;">
+              <span>Опциональный ИИ-помощник</span>
+              <span style="font-size:10px; padding:2px 7px; border-radius:6px; background:rgba(139,92,246,0.25); color:var(--purple-light);">Честный ИИ</span>
+            </div>
+            <p style="font-size:12px; color:var(--text-muted); margin-top:3px;">
+              Задаёт сократические вопросы, но не даёт приказов. Всегда обозначает, что это ИИ.
+            </p>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="aiToggle" checked onchange="renderPhone()">
+            <span class="slider-round"></span>
+          </label>
+        </div>
+
+        <!-- Action Scenario Buttons -->
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+          <button class="btn btn-primary" onclick="startPauseScreen()">
+            1. Открыть <span class="currentAppName">TikTok</span>
+          </button>
+          <button class="btn btn-secondary" onclick="startLimitScreen()">
+            2. Исчерпать лимит
+          </button>
+        </div>
+
+        <!-- Local Telemetry -->
+        <div>
+          <div style="display:flex; justify-content:space-between; font-size:11.5px; color:var(--text-dim); margin-bottom:8px;">
+            <span>Локальная статистика сессии (On-device):</span>
+            <button onclick="resetSim()" style="background:none; border:none; color:var(--purple-light); cursor:pointer; text-decoration:underline; font-size:11.5px;">Сбросить</button>
+          </div>
+          <div class="telemetry-strip">
+            <div class="tele-box">
+              <div class="tele-num" id="statBypass" style="color:var(--gold-accent);">0</div>
+              <div style="font-size:11px; color:var(--text-muted);">Попыток обхода</div>
+            </div>
+            <div class="tele-box">
+              <div class="tele-num" id="statRound" style="color:var(--purple-light);">Круг 0</div>
+              <div style="font-size:11px; color:var(--text-muted);">Уровень трения</div>
+            </div>
+            <div class="tele-box">
+              <div class="tele-num" id="statSaved" style="color:var(--emerald-accent);">0</div>
+              <div style="font-size:11px; color:var(--text-muted);">Осознанных выходов</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Smartphone Simulator -->
+      <div class="phone-chassis">
+        <div class="phone-screen">
+          <div class="phone-statusbar">
+            <span>21:45 · AITU</span>
+<div class="dynamic-island"></div>
+            <span>On-Device</span>
+          </div>
+
+          <div class="phone-body" id="phoneViewport">
+            <!-- Rendered dynamically by JS -->
+          </div>
+
+          <div class="phone-footer">
+            <span style="color:var(--text-dim);">Правила заданы вами</span>
+            <button onclick="showSettingsScreen()" style="background:none; border:none; color:var(--text-muted); text-decoration:underline; cursor:pointer; font-size:11px;">
+              Настройки / Отключить защиту
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. ETHICS, LIMITS & AITU PILOT -->
+<section id="ethics">
+  <div class="container">
+    <span class="section-eyebrow">Slides 09 – 10 · Ethics & Research Pilot</span>
+    <h2 class="section-title" data-i18n="eth_title">Этика: что может пойти не так?</h2>
+    <p class="section-lead" data-i18n="eth_desc">
+      Полезный инструмент обязан уважать личность человека, не использовать тёмные паттерны и честно признавать границы своих возможностей.
+    </p>
+
+    <div class="ethics-grid">
+      <div class="glass-card ethics-card">
+        <div class="ethics-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        </div>
+        <div style="font-size:11px; color:var(--purple-light); font-weight:700; text-transform:uppercase;">Приватность</div>
+        <h3 style="font-size:16px; margin:6px 0 8px;">Данные на устройстве</h3>
+        <p style="font-size:12.5px; color:var(--text-muted);">Никаких аккаунтов, облачной слежки и передачи данных третьим лицам.</p>
+      </div>
+
+      <div class="glass-card ethics-card">
+        <div class="ethics-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20V10M18 20V4M6 20v-4"/></svg>
+        </div>
+        <div style="font-size:11px; color:var(--purple-light); font-weight:700; text-transform:uppercase;">Без гиперконтроля</div>
+        <h3 style="font-size:16px; margin:6px 0 8px;">Правила меняете вы</h3>
+        <p style="font-size:12.5px; color:var(--text-muted);">Ограничения устанавливает сам пользователь, и их всегда можно прозрачно изменить.</p>
+      </div>
+
+      <div class="glass-card ethics-card">
+        <div class="ethics-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        </div>
+        <div style="font-size:11px; color:var(--purple-light); font-weight:700; text-transform:uppercase;">Без манипуляции</div>
+        <h3 style="font-size:16px; margin:6px 0 8px;">Прозрачный ИИ</h3>
+        <p style="font-size:12.5px; color:var(--text-muted);">Никаких скрытых уловок. ИИ-помощник опционален и всегда говорит, что он ИИ.</p>
+      </div>
+
+      <div class="glass-card ethics-card">
+        <div class="ethics-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+        </div>
+        <div style="font-size:11px; color:var(--purple-light); font-weight:700; text-transform:uppercase;">Справедливость</div>
+        <h3 style="font-size:16px; margin:6px 0 8px;">Без стыда и вины</h3>
+        <p style="font-size:12.5px; color:var(--text-muted);">Многим соцсети нужны для учёбы и связи, поэтому мы никогда не наказываем за их использование.</p>
+      </div>
+
+      <div class="glass-card ethics-card gold-card">
+        <div class="ethics-icon" style="color:var(--gold-accent); border-color:var(--border-gold);">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+</div>
+        <div style="font-size:11px; color:var(--gold-accent); font-weight:700; text-transform:uppercase;">Честные границы</div>
+        <h3 style="font-size:16px; margin:6px 0 8px;">Реалистичный фокус</h3>
+        <p style="font-size:12.5px; color:var(--text-muted);">Приложение не изменит бизнес-модель платформ и не остановит буллинг, но защитит ваше внимание.</p>
+      </div>
+    </div>
+
+    <!-- Next Step: AITU Pilot Banner -->
+    <div class="glass-card pilot-banner">
+      <div>
+        <span class="tag-pill" style="margin-bottom:12px;">Slide 10 · Next Step · Astana IT University</span>
+        <h3 style="font-family:var(--font-serif); font-size:34px; line-height:1.15; margin-bottom:12px;">
+          Добровольный пилот среди 50–100 студентов AITU
+        </h3>
+        <p style="font-size:14.5px; color:var(--text-muted);">
+          Это концепция и проверяемая научная гипотеза — мы не заявляем о готовых результатах заранее. Следующий этап проекта: добровольное тестирование прототипа среди студентов Astana IT University в Астане, чтобы оценить реальную эффективность механики осознанной паузы.
+        </p>
+
+        <form class="pilot-form" onsubmit="registerPilot(event)">
+          <input type="text" id="pName" class="phone-input" required placeholder="Ваше имя" />
+          <input type="text" id="pGroup" class="phone-input" required placeholder="Группа (напр. SE-2401)" />
+          <button type="submit" class="btn btn-primary">Записаться в пилот</button>
+        </form>
+        <div id="pilotMsg" style="display:none; margin-top:12px; padding:12px 16px; border-radius:12px; background:rgba(52,211,153,0.12); border:1px solid rgba(52,211,153,0.35); color:#a7f3d0; font-size:13px;"></div>
+      </div>
+
+      <!-- Astana Baiterek Vector Illustration -->
+      <div style="text-align:center; padding:20px; border-radius:20px; background:linear-gradient(180deg, rgba(139,92,246,0.16), rgba(9,8,15,0.75)); border:1px solid var(--border-purple);">
+        <svg width="160" height="160" viewBox="0 0 200 200" fill="none">
+          <defs>
+            <radialGradient id="astanaGlow" cx="50%" cy="35%" r="50%">
+              <stop offset="0%" stop-color="#f3c677" stop-opacity="0.85"/>
+              <stop offset="55%" stop-color="#8b5cf6" stop-opacity="0.35"/>
+              <stop offset="100%" stop-color="#09080f" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <circle cx="100" cy="66" r="64" fill="url(#astanaGlow)"/>
+          <circle cx="100" cy="56" r="18" fill="#f3c677" fill-opacity="0.25" stroke="#f3c677" stroke-width="2"/>
+          <circle cx="100" cy="56" r="9" fill="#fde68a" fill-opacity="0.7"/>
+          <path d="M84 166 L93 74 M116 166 L107 74 M92 166 L97 74 M108 166 L103 74 M100 166 L100 74" stroke="#c084fc" stroke-width="2" stroke-linecap="round"/>
+          <path d="M93 74 Q82 62 84 44 M107 74 Q118 62 116 44 M97 74 Q89 58 91 40 M103 74 Q111 58 109 40" stroke="#e9d5ff" stroke-width="1.5" stroke-linecap="round"/>
+          <rect x="22" y="132" width="18" height="34" rx="2" fill="#1b1730"/>
+          <rect x="46" y="120" width="22" height="46" rx="2" fill="#271c47"/>
+          <rect x="132" y="122" width="20" height="44" rx="2" fill="#271c47"/>
+          <rect x="158" y="135" width="20" height="31" rx="2" fill="#1b1730"/>
+          <line x1="12" y1="166" x2="188" y2="166" stroke="#a855f7" stroke-width="2"/>
+        </svg>
+        <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.14em; color:var(--purple-light); margin-top:6px;">Astana · Kazakhstan · 2026</div>
+        <div style="font-size:11.5px; color:var(--text-dim); margin-top:3px;">Концептуальный прототип · Без претензий на готовый эффект</div>
+      </div>
+    </div>
+  </div>
+</section>
